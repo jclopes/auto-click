@@ -4,9 +4,8 @@ import cv2 as cv
 import numpy as np
 import pyautogui
 
-def findButton(img):
+def findButton(img, template):
   img_gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
-  template = cv.imread('template.png', 0)
   w, h = template.shape[::-1]
 
   res = cv.matchTemplate(img_gray, template, cv.TM_CCOEFF_NORMED)
@@ -23,15 +22,22 @@ def takeShot():
 
 def main():
   is_retina = True
+  template = cv.imread('template.png', 0)
+
   screenshot = takeShot()
-  buttonPos = findButton(screenshot)
+  buttonPos = findButton(screenshot, template)
 
   while (buttonPos == None):
     time.sleep(2)
     screenshot = takeShot()
-    buttonPos = findButton(screenshot)
+    buttonPos = findButton(screenshot, template)
 
+  # click on the midle: top left corner of match + half of the template size
   xx, yy = buttonPos
+  xx += len(template[0]) / 2
+  yy += len(template) / 2
+
+  # retina display have double pixels density
   if is_retina:
     xx /= 2
     yy /= 2

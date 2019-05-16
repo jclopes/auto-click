@@ -13,13 +13,13 @@ def findButton(img, template):
   res = cv.matchTemplate(img_gray, template, cv.TM_CCOEFF_NORMED)
   min_val, max_val, min_loc, max_loc = cv.minMaxLoc(res)
 
-  if max_val < 0.9:
+  if max_val < 0.8:
     return None
   return max_loc
 
 
 def takeShot():
-  screenshot = pyautogui.screenshot()
+  screenshot = pyautogui.screenshot("capture.png")
   screenshot = cv.cvtColor(np.array(screenshot), cv.COLOR_RGB2BGR)
   return screenshot
 

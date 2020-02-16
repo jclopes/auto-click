@@ -1,4 +1,5 @@
 import signal
+import os
 import sys
 import time
 import cv2 as cv
@@ -22,6 +23,15 @@ def takeShot():
   screenshot = pyautogui.screenshot("capture.png")
   screenshot = cv.cvtColor(np.array(screenshot), cv.COLOR_RGB2BGR)
   return screenshot
+
+
+def terminate():
+  print("\nShutting down...")
+  try:
+    os.remove("capture.png")
+  except OSError:
+    pass
+  print("Terminated.")
 
 
 def main():
@@ -50,7 +60,7 @@ def main():
 
 
 def signal_handler(signal, frame):
-  print('\nTerminating...\n')
+  terminate()
   sys.exit(0)
 
 

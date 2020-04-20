@@ -1,8 +1,10 @@
 #! /usr/bin/env bash
 
-rm -rf env
-virtualenv env
-source env/bin/activate
+ENV=env
+
+rm -rf ${ENV}
+virtualenv -p python3 ${ENV}
+source ${ENV}/bin/activate
 if [[ $? -ne 0 ]] ; then
     exit 1
 fi

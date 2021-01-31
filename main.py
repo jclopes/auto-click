@@ -79,7 +79,7 @@ def main():
 
     pyautogui.click(xx,yy)
     time.sleep(0.5)
-    pyautogui.moveTo(0, 0)
+    pyautogui.moveTo(20, 20)
 
 
 def signal_handler(signal, frame):

@@ -1,3 +1,2 @@
 #! /usr/bin/env bash
-source env/bin/activate
-python main.py
+env/bin/python main.py

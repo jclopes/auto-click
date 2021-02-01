@@ -1,11 +1,8 @@
 #! /usr/bin/env bash
 
-ENV=env
-
-rm -rf ${ENV}
-virtualenv -p python3 ${ENV}
-source ${ENV}/bin/activate
+python3 -m venv env
 if [[ $? -ne 0 ]] ; then
+	echo "Failed to run python3"
     exit 1
 fi
-pip install -r requirements.txt
+./env/bin/pip install -r requirements.txt

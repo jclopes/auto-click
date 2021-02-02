@@ -23,14 +23,14 @@ def findButton(img, templates):
   """
   # scale down the images by a factor of 4. This will help with performance.
   img_r = cv.resize(img, (0,0), fx=0.25, fy=0.25)
-  
+
   for template in templates:
     w, h = template.shape[::-1]
 
     res = cv.matchTemplate(img_r, template, cv.TM_CCOEFF_NORMED)
     min_val, max_val, min_loc, max_loc = cv.minMaxLoc(res)
 
-    if max_val > 0.8:
+    if max_val > 0.75:
       px, py = max_loc
       mp = midPoint(template, px, py)
       # need to revert the downscaling.

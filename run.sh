@@ -1,2 +1,2 @@
 #! /usr/bin/env bash
-./env/bin/python main.py
+./env/bin/python main.py retina

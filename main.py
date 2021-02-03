@@ -5,7 +5,7 @@ import time
 import cv2 as cv
 import numpy as np
 import pyautogui
-
+from pathlib import Path
 
 def midPoint(template, px, py):
   xx = px + (len(template[0]) / 2)
@@ -53,18 +53,22 @@ def terminate():
     pass
   print("Terminated.")
 
+def loadTemplates():
+  p = Path("templates")
+  # TODO: check if the template files exist
+  files = p.glob('*.png')
+  # scale down the images by a factor of 4. This will help with performance.
+  res = [cv.resize(cv.imread(str(f), 0), (0,0), fx=0.25, fy=0.25) for f in files]
+  return res
 
 def main():
   is_retina = False
   for i in sys.argv:
     if i == 'retina':
       is_retina = True
-  # TODO: check if the template files exist
-  templates = list()
-  # scale down the images by a factor of 4. This will help with performance.
-  templates.append(cv.resize(cv.imread('template01.png', 0), (0,0), fx=0.25, fy=0.25))
-  templates.append(cv.resize(cv.imread('template02.png', 0), (0,0), fx=0.25, fy=0.25))
-
+  
+  templates = loadTemplates()
+  
   while True:
     match_t = None
     while (match_t is None):

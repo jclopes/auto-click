@@ -30,7 +30,7 @@ def findButton(img, templates):
     res = cv.matchTemplate(img_r, template, cv.TM_CCOEFF_NORMED)
     min_val, max_val, min_loc, max_loc = cv.minMaxLoc(res)
 
-    if max_val > 0.75:
+    if max_val > 0.70:
       px, py = max_loc
       mp = midPoint(template, px, py)
       # need to revert the downscaling.
